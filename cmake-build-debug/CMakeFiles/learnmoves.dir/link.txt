@@ -1,0 +1,3 @@
+"C:\Program Files\JetBrains\CLion 2021.2.2\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\learnmoves.dir/objects.a
+C:\PROGRA~1\mingw64\bin\ar.exe cr CMakeFiles\learnmoves.dir/objects.a @CMakeFiles\learnmoves.dir\objects1.rsp
+C:\PROGRA~1\mingw64\bin\g++.exe -g -Wl,--whole-archive CMakeFiles\learnmoves.dir/objects.a -Wl,--no-whole-archive -o learnmoves.exe -Wl,--out-implib,liblearnmoves.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\learnmoves.dir\linklibs.rsp
