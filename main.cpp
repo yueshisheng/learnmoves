@@ -1,10 +1,15 @@
 #include <iostream>
+#include <mutex>
+#include <shared_mutex>
 //移动语义和完美转发
 using namespace std;
 class base{
 public:
     int* m_data= nullptr;
     //本来的构造函数
+    base(){
+
+    }
     base(int* data){
         this->m_data=data;
 
@@ -15,23 +20,22 @@ public:
         this->m_data=new int(*(b.m_data));
         cout<<*(this->m_data)<<endl;
     }
-    //移动构造函数
-     explicit  base(base&& rbase) noexcept{
-        cout<<"移动构造函数"<<endl;
-        this->m_data=rbase.m_data;
-        rbase.m_data= nullptr;//把右值引用设为空
-
-    }
+//    //移动构造函数
+//       base(base&& rbase) noexcept{
+//        cout<<"移动构造函数"<<endl;
+//        this->m_data=rbase.m_data;
+//        rbase.m_data= nullptr;//把右值引用设为空
+//
+//    }
     //移动赋值函数
-    base   operator=(base&& rbase)noexcept{
+    base& operator=(base&& rbase)noexcept{
         cout << "移动赋值函数" << endl;
-        if(this!=&rbase) {
             if(this->m_data!= nullptr) {
                 this->m_data = rbase.m_data;
                 rbase.m_data = nullptr;
                 return *this;
             }
-        }
+
 
 
     }
@@ -66,9 +70,10 @@ int main() {
 
     //通过move函数，将左值引用转换为右值引用
     base base3(dataptr2);
-    base base4(std::move(base3));
+    base base4(dataptr2);
+    base4=move(getbase());
     cout<<*base4.m_data<<endl;
-    
+
 
 
 
